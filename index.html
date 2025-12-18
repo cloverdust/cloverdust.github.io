@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Games & Apps Hub</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#111; color:#eee; margin:0; }
+    header { background:#222; padding:12px; text-align:center; position:sticky; top:0; }
+    nav a {
+      display:inline-block; margin:0 12px; padding:8px 14px;
+      background:#333; color:#6ee7ff; text-decoration:none; border-radius:6px;
+    }
+    nav a:hover { background:#555; }
+    section { padding:40px; text-align:center; display:none; }
+    section.active { display:block; }
+    a {
+      display:inline-block; margin:10px; padding:12px 20px;
+      background:#333; color:#6ee7ff; text-decoration:none; border-radius:6px;
+    }
+    a:hover { background:#555; }
+    input[type="text"] {
+      padding:10px; width:250px; border-radius:6px; border:1px solid #444;
+      background:#222; color:#eee;
+    }
+    button {
+      padding:10px 16px; border:none; border-radius:6px;
+      background:#6ee7ff; color:#111; cursor:pointer; margin-top:20px;
+    }
+    button:hover { background:#55cce0; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <!-- Top navigation -->
+  <header>
+    <nav>
+      <a href="#home" onclick="showSection('home')">Home</a>
+      <a href="#games" onclick="showSection('games')">Games</a>
+      <a href="#apps" onclick="showSection('apps')">Apps</a>
+    </nav>
+  </header>
+
+  <!-- Home -->
+  <section id="home" class="active">
+    <h1>Welcome to the Hub</h1>
+    <p>Use the navigation above to explore Games and Apps.</p>
+    <h2>Search</h2>
+    <input type="text" id="searchBox" placeholder="Type to search games or apps..." />
+  </section>
+
+  <!-- Games -->
+  <section id="games">
+    <h2>Games</h2>
+    <a href="/snake">Snake</a>
+    <a href="/flappy">Flappy Square</a>
+    <a href="/breakout">Breakout</a>
+  </section>
+
+  <!-- Apps -->
+  <section id="apps">
+    <h2>Apps</h2>
+    <button id="toggleApps">Show Apps</button>
+    <div id="appsList" class="hidden">
+      <a href="/calculator">Calculator</a>
+      <a href="/notes">Notes</a>
+      <a href="/music">Music Player</a>
+      <a href="/tapps">Apps Hub</a>
+    </div>
+  </section>
+
+  <script>
+    // Show only one section at a time
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Live search filter
+    const searchBox = document.getElementById('searchBox');
+    searchBox.addEventListener('input', () => {
+      const term = searchBox.value.toLowerCase();
+      const links = document.querySelectorAll('section a');
+      links.forEach(link => {
+        const text = link.textContent.toLowerCase();
+        if (term && !text.includes(term)) {
+          link.classList.add('hidden');
+        } else {
+          link.classList.remove('hidden');
+        }
+      });
+    });
+
+    // Toggle Apps list
+    const toggleBtn = document.getElementById('toggleApps');
+    const appsList = document.getElementById('appsList');
+    toggleBtn.addEventListener('click', () => {
+      if (appsList.classList.contains('hidden')) {
+        appsList.classList.remove('hidden');
+        toggleBtn.textContent = "Hide Apps";
+      } else {
+        appsList.classList.add('hidden');
+        toggleBtn.textContent = "Show Apps";
+      }
+    });
+  </script>
+</body>
+</html>
