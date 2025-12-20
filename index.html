@@ -13,11 +13,30 @@
     nav a:hover { background:#555; }
     section { padding:40px; text-align:center; display:none; }
     section.active { display:block; }
+
+    /* Game item layout */
+    .game-item {
+      display:inline-block;
+      width:150px;
+      margin:15px;
+      text-align:center;
+    }
+
+    .game-img {
+      width:150px;
+      height:100px;
+      object-fit:cover;
+      border-radius:6px;
+      margin-bottom:10px;
+      background:#333;
+    }
+
     a {
-      display:inline-block; margin:10px; padding:12px 20px;
+      display:inline-block; padding:8px 12px;
       background:#333; color:#6ee7ff; text-decoration:none; border-radius:6px;
     }
     a:hover { background:#555; }
+
     input[type="text"] {
       padding:10px; width:250px; border-radius:6px; border:1px solid #444;
       background:#222; color:#eee;
@@ -51,25 +70,101 @@
     <h2>Games</h2>
     <input type="text" id="gameSearch" placeholder="Search games..." />
     <div id="gamesList">
-      
-      <a href="/1v1lol">1v1 lol</a>
-      <a href="/2048">2048</a>
-      <a href="/2drocketleague">2d rocket league</a>
-      <a href="/60sburgerrun">60 second burger run</a>
-      <a href="/achieveunlocked">Achieve unlocked</a>
-      <a href="/achieveunlocked2">Achievement unlocked 2</a>
-      <a href="/amazing-rope-police">Amazing strange rope police</a>
-      <a href="/basketrandom">Basket random</a>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/1v1lol">1v1 lol</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/2048">2048</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/2drocketleague">2d rocket league</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/60sburgerrun">60 second burger run</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/achieveunlocked">Achieve unlocked</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/achieveunlocked2">Achievement unlocked 2</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/amazing-rope-police">Amazing strange rope police</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/basketrandom">Basket random</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
         <a href="/BTD">Bloons tower defense</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
         <a href="/bit-planes">Bloons tower defense</a>
-     <a href="/drivemad">Drive mad</a>
-      <a href="/fortnite">Fortnite battle royale</a>
-       <a href="/ovo">OvO</a>
-      <a href="/getawayshootout">Getaway Shootout</a>
-       <a href="/retrobowl">Retro bowl</a>
-      <a href="/roblox">Roblox</a>
-      <a href="/snowrider">Snow rider 3d</a>
-       <a href="/tag">Tag</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/drivemad">Drive mad</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/fortnite">Fortnite battle royale</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE">
+        <a href="/ovo">OvO</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/getawayshootout">Getaway Shootout</a>
+      </div>
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/gunspin">Gunspin</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/retrobowl">Retro bowl</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/roblox">Roblox</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/snowrider">Snow rider 3d</a>
+      </div>
+
+      <div class="game-item">
+        <img src="IMAGE-LINK-HERE" class="game-img">
+        <a href="/tag">Tag</a>
+      </div>
+
     </div>
   </section>
 
@@ -86,28 +181,25 @@
   </section>
 
   <script>
-    // Show only one section at a time
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
 
-    // Search filter for games
     const gameSearch = document.getElementById('gameSearch');
     gameSearch.addEventListener('input', () => {
       const term = gameSearch.value.toLowerCase();
-      const links = document.querySelectorAll('#gamesList a');
-      links.forEach(link => {
-        const text = link.textContent.toLowerCase();
+      const items = document.querySelectorAll('#gamesList .game-item');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
         if (term && !text.includes(term)) {
-          link.classList.add('hidden');
+          item.classList.add('hidden');
         } else {
-          link.classList.remove('hidden');
+          item.classList.remove('hidden');
         }
       });
     });
 
-    // Toggle Apps list
     const toggleBtn = document.getElementById('toggleApps');
     const appsList = document.getElementById('appsList');
     toggleBtn.addEventListener('click', () => {
